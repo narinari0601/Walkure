@@ -886,6 +886,9 @@ MonoBehaviour:
   speed: 2.5
   normalBulletPrefab: {fileID: 8423287041812860112, guid: e499dbd0b123f924eb38b84a75d492b2,
     type: 3}
+  specialBulletPrefab: {fileID: 3201080603510451456, guid: 3805995d09b5e9242a51b1f155fff90d,
+    type: 3}
+  maxChargeTime: 1
 --- !u!1 &1879108746
 GameObject:
   m_ObjectHideFlags: 0

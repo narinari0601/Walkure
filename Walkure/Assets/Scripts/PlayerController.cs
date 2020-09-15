@@ -33,6 +33,18 @@ public class PlayerController : MonoBehaviour
 
     private float normalDamage;
 
+    [SerializeField,Header("特殊弾プレハブ")]
+    private GameObject specialBulletPrefab = null;
+
+    [SerializeField,Header("チャージ時間")]
+    private float maxChargeTime = 1.0f;
+
+    private float chargeTimer;
+
+    private bool isCharge;  //チャージ中ならtrue
+
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,6 +53,10 @@ public class PlayerController : MonoBehaviour
         directionVector = Vector3.zero;
 
         normalDamage = 1.0f;
+
+        chargeTimer = 0.0f;
+
+        isCharge = false;
     }
     
     private void Update()
@@ -130,7 +146,13 @@ public class PlayerController : MonoBehaviour
         //velocity.Set(key_x, 0, key_z);
         velocity = directionVector;
         velocity = velocity.normalized * speed * Time.deltaTime;
-        rb.MovePosition(transform.position + velocity);
+
+        if (!isCharge)
+        {
+            rb.MovePosition(transform.position + velocity);
+        }
+
+        
     }
 
     private void Shot()
@@ -139,7 +161,27 @@ public class PlayerController : MonoBehaviour
         {
             var normalBullet = Instantiate(normalBulletPrefab, transform.position + directionVector / 5, Quaternion.Euler(90, 0, 0));
 
-            normalBullet.GetComponent<PlayerBullet>().Initialize(directionVector, normalDamage);
+            normalBullet.GetComponent<NormalBullet>().Initialize(directionVector, normalDamage);
+        }
+
+        if (Input.GetKey(KeyCode.Z))
+        {
+            chargeTimer += Time.deltaTime;
+            isCharge = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            if (chargeTimer >= maxChargeTime)
+            {
+                var specialBullet = Instantiate(specialBulletPrefab, transform.position + directionVector / 5, Quaternion.Euler(90, 0, 0));
+
+                specialBullet.GetComponent<SpecialBullet>().Initialize(directionVector);
+            }
+
+            chargeTimer = 0;
+
+            isCharge = false;
         }
     }
 

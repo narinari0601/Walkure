@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBullet : MonoBehaviour
+public class NormalBullet : MonoBehaviour
 {
-
     [SerializeField, Header("弾速")]
     private float speed = 1.0f;
 
@@ -20,10 +19,10 @@ public class PlayerBullet : MonoBehaviour
 
     void Start()
     {
-        //Initialize();
+        
     }
 
-    public void Initialize(Vector3 directionVector,float damage)
+    public void Initialize(Vector3 directionVector, float damage)
     {
         currentTimer = 0;
 
@@ -49,7 +48,7 @@ public class PlayerBullet : MonoBehaviour
     {
         var obj = other.gameObject;
 
-        if(obj.tag=="Enemy")
+        if (obj.tag == "Enemy")
         {
             obj.GetComponent<Enemy>().AttackedBullet(attackDamage);
 
