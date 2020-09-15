@@ -16,16 +16,20 @@ public class PlayerBullet : MonoBehaviour
 
     private float currentTimer;  //出現してからの時間
 
+    private float attackDamage;
+
     void Start()
     {
         //Initialize();
     }
 
-    public void Initialize(Vector3 directionVector)
+    public void Initialize(Vector3 directionVector,float damage)
     {
         currentTimer = 0;
 
         velocity = directionVector.normalized * speed * 0.01f;
+
+        attackDamage = damage;
     }
 
 
@@ -47,6 +51,8 @@ public class PlayerBullet : MonoBehaviour
 
         if(obj.tag=="Enemy")
         {
+            obj.GetComponent<Enemy>().AttackedBullet(attackDamage);
+
             Destroy(gameObject);
         }
     }

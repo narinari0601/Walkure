@@ -29,7 +29,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 directionVector;
 
     [SerializeField, Header("通常弾プレハブ")]
-    private GameObject playerBulletPrefab = null;
+    private GameObject normalBulletPrefab = null;
+
+    private float normalDamage;
 
     void Start()
     {
@@ -37,6 +39,8 @@ public class PlayerController : MonoBehaviour
         velocity = Vector3.zero;
         playerDirection = PlayerDirection.DOWN;
         directionVector = Vector3.zero;
+
+        normalDamage = 1.0f;
     }
     
     private void Update()
@@ -133,9 +137,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            var playerBullet = Instantiate(playerBulletPrefab, transform.position + directionVector / 5, Quaternion.Euler(90, 0, 0));
+            var normalBullet = Instantiate(normalBulletPrefab, transform.position + directionVector / 5, Quaternion.Euler(90, 0, 0));
 
-            playerBullet.GetComponent<PlayerBullet>().Initialize(directionVector);
+            normalBullet.GetComponent<PlayerBullet>().Initialize(directionVector, normalDamage);
         }
     }
 
