@@ -688,6 +688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.5
+  playerBulletPrefab: {fileID: 8423287041812860112, guid: e499dbd0b123f924eb38b84a75d492b2,
+    type: 3}
 --- !u!1 &1879108746
 GameObject:
   m_ObjectHideFlags: 0
