@@ -49,8 +49,9 @@ public class SpecialBullet : MonoBehaviour
 
     //private void OnWillRenderObject()
     //{
-    //    if (Camera.current.tag == "MainCamera")
+    //    if (Camera.current.name != "SceneCamera" && Camera.current.name != "Preview Camera")
     //    {
+    //        //Destroy(gameObject);
     //        Debug.Log(true);
     //    }
     //}
