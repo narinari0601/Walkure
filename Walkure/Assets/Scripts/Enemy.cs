@@ -44,4 +44,6 @@ public class Enemy : MonoBehaviour
     {
         currentHP -= damage;
     }
+
+  
 }

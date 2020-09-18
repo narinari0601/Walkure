@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af68a3c808add84a98b732515338480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   routeTargetArray:
   - {fileID: 8409664546822912949}
   - {fileID: 7484499977284862292}
