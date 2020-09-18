@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField,Header("チャージ時間")]
     private float maxChargeTime = 1.0f;
 
+    [SerializeField,Header("ボタンを押してからチャージが始まるまでの時間")]
+    private float chargeStartTime = 0.5f;
+
     private float chargeTimer;
 
     private bool isCharge;  //チャージ中ならtrue
@@ -157,6 +160,8 @@ public class PlayerController : MonoBehaviour
 
     private void Shot()
     {
+
+        //押した瞬間
         if (Input.GetKeyDown(KeyCode.Z))
         {
             var normalBullet = Instantiate(normalBulletPrefab, transform.position + directionVector / 5, Quaternion.Euler(90, 0, 0));
@@ -164,12 +169,14 @@ public class PlayerController : MonoBehaviour
             normalBullet.GetComponent<NormalBullet>().Initialize(directionVector, normalDamage);
         }
 
+        //押してる間
         if (Input.GetKey(KeyCode.Z))
         {
             chargeTimer += Time.deltaTime;
-            isCharge = true;
+            //isCharge = true;
         }
 
+        //離した瞬間
         if (Input.GetKeyUp(KeyCode.Z))
         {
             if (chargeTimer >= maxChargeTime)
@@ -182,6 +189,11 @@ public class PlayerController : MonoBehaviour
             chargeTimer = 0;
 
             isCharge = false;
+        }
+
+        if (chargeTimer >= chargeStartTime)
+        {
+            isCharge = true;
         }
     }
 
