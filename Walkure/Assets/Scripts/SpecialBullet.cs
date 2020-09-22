@@ -62,7 +62,7 @@ public class SpecialBullet : MonoBehaviour
 
         if (obj.tag == "Enemy")
         {
-            obj.GetComponent<Enemy>().AttackedBullet(attackDamage);
+            obj.GetComponent<Enemy>().AttackedSpecialBullet(attackDamage);
             
         }
     }

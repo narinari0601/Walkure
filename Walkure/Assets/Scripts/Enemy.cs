@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     private float currentHP;
 
     private Slider hpSlider;
+
+    private PlayerController pc;
     
 
     void Start()
@@ -25,6 +27,8 @@ public class Enemy : MonoBehaviour
         hpSlider = GetComponentInChildren<Slider>();
 
         hpSlider.value = 1;
+
+        pc = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -45,5 +49,15 @@ public class Enemy : MonoBehaviour
         currentHP -= damage;
     }
 
+
+    public void AttackedSpecialBullet(float damage)
+    {
+        currentHP -= damage;
+
+        if (currentHP <= 0)
+        {
+            pc.CurrentExperience++;
+        }
+    }
   
 }

@@ -2011,6 +2011,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86083911c2f614c4e8f757e4a7c827b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLevel: 5
+  levelUpExperience: 2
   speed: 2.5
   normalBulletPrefab: {fileID: 8423287041812860112, guid: e499dbd0b123f924eb38b84a75d492b2,
     type: 3}

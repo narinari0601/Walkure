@@ -19,7 +19,22 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
+
+    //
     private float hp;
+
+    private int playerLevel;
+
+    //private const int MAXLEVEL = 5;
+
+    [SerializeField, Header("最大レベル")]
+    private int maxLevel = 5;
+
+    private int currentExperience;  //現在の経験値
+
+    [SerializeField, Header("レベルアップに必要な経験値")]
+    private int levelUpExperience;  //レベルアップに必要な経験値
+
 
     [SerializeField, Header("移動速度")]
     private float speed = 1.0f;
@@ -49,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private bool isCharge;  //チャージ中ならtrue
 
     public float Hp { get => hp; set => hp = value; }
+    public int CurrentExperience { get => currentExperience; set => currentExperience = value; }
 
     void Start()
     {
@@ -56,11 +72,15 @@ public class PlayerController : MonoBehaviour
 
         hp = 10;
 
+        currentExperience = 0;
+
+        playerLevel = currentExperience / levelUpExperience + 1;
+
         velocity = Vector3.zero;
         playerDirection = PlayerDirection.DOWN;
         directionVector = Vector3.zero;
 
-        normalDamage = 1.0f;
+        normalDamage = playerLevel;
 
         chargeTimer = 0.0f;
 
@@ -70,12 +90,17 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Shot();
-        
 
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    currentExperience++;
+        //}
     }
     private void FixedUpdate()
     {
         PlayerMove();
+
+        LevelUp();
 
         PlayerDead();
 
@@ -170,6 +195,8 @@ public class PlayerController : MonoBehaviour
     private void Shot()
     {
 
+        normalDamage = playerLevel;
+
         //押した瞬間
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -204,6 +231,19 @@ public class PlayerController : MonoBehaviour
             isCharge = true;
         }
     }
+
+    private void LevelUp()
+    {
+        
+
+        playerLevel = currentExperience / levelUpExperience + 1;
+
+        if (playerLevel > maxLevel)
+            playerLevel = maxLevel;
+
+        Debug.Log("レベル : " + playerLevel);
+    }
+
 
     private void PlayerDead()
     {
