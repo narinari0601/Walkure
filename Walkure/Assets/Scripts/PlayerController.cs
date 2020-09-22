@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
+    private float hp;
+
     [SerializeField, Header("移動速度")]
     private float speed = 1.0f;
 
@@ -46,11 +48,14 @@ public class PlayerController : MonoBehaviour
 
     private bool isCharge;  //チャージ中ならtrue
 
-
+    public float Hp { get => hp; set => hp = value; }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        hp = 10;
+
         velocity = Vector3.zero;
         playerDirection = PlayerDirection.DOWN;
         directionVector = Vector3.zero;
@@ -65,11 +70,15 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Shot();
+        
+
     }
     private void FixedUpdate()
     {
-        
         PlayerMove();
+
+        PlayerDead();
+
     }
 
     private void PlayerMove()
@@ -173,7 +182,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Z))
         {
             chargeTimer += Time.deltaTime;
-            //isCharge = true;
         }
 
         //離した瞬間
@@ -197,13 +205,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PlayerDead()
+    {
+        if (hp <= 0)
+        {
+            Debug.Log("がめおべら");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         var gameObj = other.gameObject;
 
         if (gameObj.tag == "Enemy")
         {
-            //Debug.Log(true);
+            hp--;
+
+            if (hp < 0)
+                hp = 0;
         }
     }
 }
