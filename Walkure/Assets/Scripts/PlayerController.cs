@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum PlayerDirection
 {
@@ -63,6 +64,11 @@ public class PlayerController : MonoBehaviour
 
     private bool isCharge;  //チャージ中ならtrue
 
+    [SerializeField, Header("チャージゲージ")]
+    private GameObject sliderObj = null;
+
+    private Slider chargeSlider;
+
     public float Hp { get => hp; set => hp = value; }
     public float CurrentExperience { get => currentExperience; set => currentExperience = value; }
     public float LevelUpExperience { get => levelUpExperience;}
@@ -70,6 +76,11 @@ public class PlayerController : MonoBehaviour
     public int MaxLevel { get => maxLevel; }
 
     void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         rb = GetComponent<Rigidbody>();
 
@@ -88,6 +99,10 @@ public class PlayerController : MonoBehaviour
         chargeTimer = 0.0f;
 
         isCharge = false;
+
+        chargeSlider = GetComponentInChildren<Slider>();
+        chargeSlider.value = 0;
+        sliderObj.SetActive(false);
     }
     
     private void Update()
@@ -227,11 +242,16 @@ public class PlayerController : MonoBehaviour
             chargeTimer = 0;
 
             isCharge = false;
+
+            sliderObj.SetActive(false);
+            chargeSlider.value = 0;
         }
 
         if (chargeTimer >= chargeStartTime)
         {
             isCharge = true;
+            sliderObj.SetActive(true);
+            chargeSlider.value = (chargeTimer - chargeStartTime) / (maxChargeTime - chargeStartTime);
         }
     }
 
