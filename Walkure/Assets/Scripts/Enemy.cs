@@ -13,7 +13,9 @@ public class Enemy : MonoBehaviour
     private Slider hpSlider;
 
     private PlayerController pc;
-    
+
+    [SerializeField, Header("ダメージUI")]
+    private GameObject damageObj = null;
 
     void Start()
     {
@@ -58,6 +60,13 @@ public class Enemy : MonoBehaviour
         {
             pc.CurrentExperience++;
         }
+    }
+
+    public void DamageEffect(float damage)
+    {
+        var obj = Instantiate(damageObj, transform.position + new Vector3(0, 0, GetComponent<Collider>().bounds.size.z / 2), Quaternion.identity);
+        //obj.transform.SetParent(transform);
+        obj.GetComponent<EnemyDamageUI>().Initialize(damage);
     }
   
 }

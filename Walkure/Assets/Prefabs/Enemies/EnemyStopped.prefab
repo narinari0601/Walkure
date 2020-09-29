@@ -542,6 +542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
+  damageObj: {fileID: 8660056852350185847, guid: 1c39d833c6d208347b639f789f1c7f88,
+    type: 3}
 --- !u!1 &3870204106691087457
 GameObject:
   m_ObjectHideFlags: 0

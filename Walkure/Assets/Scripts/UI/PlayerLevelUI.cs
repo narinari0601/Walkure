@@ -26,6 +26,15 @@ public class PlayerLevelUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        levelText.text = "Lv" + pc.PlayerLevel;
+        if (pc.PlayerLevel == pc.MaxLevel)
+        {
+            levelText.text = "MAX";
+        }
+
+        else
+        {
+            levelText.text = "Lv" + pc.PlayerLevel;
+        }
+        
     }
 }

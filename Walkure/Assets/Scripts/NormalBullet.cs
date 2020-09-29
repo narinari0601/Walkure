@@ -50,7 +50,11 @@ public class NormalBullet : MonoBehaviour
 
         if (obj.tag == "Enemy")
         {
-            obj.GetComponent<Enemy>().AttackedBullet(attackDamage);
+            var enemy = obj.GetComponent<Enemy>();
+
+            enemy.AttackedBullet(attackDamage);
+
+            enemy.DamageEffect(attackDamage);
 
             Destroy(gameObject);
         }
