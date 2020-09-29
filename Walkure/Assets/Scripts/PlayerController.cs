@@ -30,10 +30,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Header("最大レベル")]
     private int maxLevel = 5;
 
-    private int currentExperience;  //現在の経験値
+    private float currentExperience;  //現在の経験値
 
     [SerializeField, Header("レベルアップに必要な経験値")]
-    private int levelUpExperience;  //レベルアップに必要な経験値
+    private float levelUpExperience = 2;  //レベルアップに必要な経験値
 
 
     [SerializeField, Header("移動速度")]
@@ -64,7 +64,10 @@ public class PlayerController : MonoBehaviour
     private bool isCharge;  //チャージ中ならtrue
 
     public float Hp { get => hp; set => hp = value; }
-    public int CurrentExperience { get => currentExperience; set => currentExperience = value; }
+    public float CurrentExperience { get => currentExperience; set => currentExperience = value; }
+    public float LevelUpExperience { get => levelUpExperience;}
+    public int PlayerLevel { get => playerLevel;}
+    public int MaxLevel { get => maxLevel; }
 
     void Start()
     {
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
         currentExperience = 0;
 
-        playerLevel = currentExperience / levelUpExperience + 1;
+        playerLevel = (int)(currentExperience / levelUpExperience) + 1;
 
         velocity = Vector3.zero;
         playerDirection = PlayerDirection.DOWN;
@@ -198,7 +201,7 @@ public class PlayerController : MonoBehaviour
         normalDamage = playerLevel;
 
         //押した瞬間
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetButtonDown("Fire1"))
         {
             var normalBullet = Instantiate(normalBulletPrefab, transform.position + directionVector / 5, Quaternion.Euler(90, 0, 0));
 
@@ -206,13 +209,13 @@ public class PlayerController : MonoBehaviour
         }
 
         //押してる間
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetButton("Fire1"))
         {
             chargeTimer += Time.deltaTime;
         }
 
         //離した瞬間
-        if (Input.GetKeyUp(KeyCode.Z))
+        if (Input.GetButtonUp("Fire1"))
         {
             if (chargeTimer >= maxChargeTime)
             {
@@ -236,12 +239,10 @@ public class PlayerController : MonoBehaviour
     {
         
 
-        playerLevel = currentExperience / levelUpExperience + 1;
+        playerLevel = (int)(currentExperience / levelUpExperience) + 1;
 
         if (playerLevel > maxLevel)
             playerLevel = maxLevel;
-
-        Debug.Log("レベル : " + playerLevel);
     }
 
 
