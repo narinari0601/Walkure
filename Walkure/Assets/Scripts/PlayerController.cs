@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour
         playerLevel = (int)(currentExperience / levelUpExperience) + 1;
 
         velocity = Vector3.zero;
-        playerDirection = PlayerDirection.DOWN;
-        directionVector = Vector3.zero;
+        playerDirection = PlayerDirection.UP;
+        directionVector = new Vector3(0, 0, 1);
 
         normalDamage = playerLevel;
 
@@ -274,16 +274,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Damage(float damage)
     {
-        var gameObj = other.gameObject;
+        hp -= damage;
 
-        if (gameObj.tag == "Enemy")
+        if (hp < 0)
         {
-            hp--;
-
-            if (hp < 0)
-                hp = 0;
+            hp = 0;
         }
     }
 }

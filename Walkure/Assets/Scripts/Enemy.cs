@@ -17,6 +17,14 @@ public class Enemy : MonoBehaviour
     [SerializeField, Header("ダメージUI")]
     private GameObject damageObj = null;
 
+    [SerializeField, Header("経験値プレハブ")]
+    private GameObject expPrefab = null;
+
+    [SerializeField,Header("経験値量")]
+    private int expValue = 0;
+
+    private int expSeed;
+
     void Start()
     {
         Initialize();
@@ -31,11 +39,17 @@ public class Enemy : MonoBehaviour
         hpSlider.value = 1;
 
         pc = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        expSeed = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        expSeed++;
+
+        if (expSeed > 1000)
+            expSeed = 0;
 
         hpSlider.value = currentHP / maxHP;
 
@@ -58,7 +72,37 @@ public class Enemy : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            pc.CurrentExperience++;
+            //pc.CurrentExperience++;
+            DrapExp(expValue);
+        }
+    }
+
+    private void DrapExp(int exp)
+    {
+
+        for (int i = 0; i < exp; i++)
+        {
+            if (i == 0)
+            {
+                var obj = Instantiate(expPrefab, transform.position, Quaternion.Euler(90, 0, 0));
+                obj.GetComponent<Experience>().Initialize();
+            }
+
+            else
+            {
+                float x = Random.Range(-0.5f, 0.5f);
+                Random.InitState(expSeed);
+                expSeed++;
+
+                float z = Random.Range(-0.3f, 0.3f);
+                Random.InitState(expSeed);
+                expSeed++;
+
+                Vector3 pos = new Vector3(x, 0.1f, z);
+
+                var obj = Instantiate(expPrefab, transform.position + pos, Quaternion.Euler(90, 0, 0));
+                obj.GetComponent<Experience>().Initialize();
+            }
         }
     }
 
@@ -68,5 +112,15 @@ public class Enemy : MonoBehaviour
         //obj.transform.SetParent(transform);
         obj.GetComponent<EnemyDamageUI>().Initialize(damage);
     }
-  
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var gameObj = other.gameObject;
+
+        if (gameObj.tag == "Player")
+        {
+            gameObj.GetComponent<PlayerController>().Damage(1);
+        }
+    }
+
 }
