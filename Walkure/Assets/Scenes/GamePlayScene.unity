@@ -231,6 +231,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50948168}
   m_CullTransparentMesh: 0
+--- !u!1001 &75985806
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 774133678}
+    m_Modifications:
+    - target: {fileID: 6474667330054784339, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474667330054784339, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905212, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyFired
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 212de0501bd851840898a8143b2b49c8, type: 3}
 --- !u!1001 &105525509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1117,6 +1196,7 @@ Transform:
   - {fileID: 1191111066}
   - {fileID: 380471662}
   - {fileID: 948017456}
+  - {fileID: 994071888}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1882,6 +1962,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &994071888 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7813491919011905215, guid: 212de0501bd851840898a8143b2b49c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 75985806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1010977586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,7 +2808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319476983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 0}

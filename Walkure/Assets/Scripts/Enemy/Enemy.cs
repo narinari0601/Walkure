@@ -10,7 +10,19 @@ public class Enemy : MonoBehaviour
 
     private float currentHP;
 
+    //[SerializeField,Header("HPゲージオブジェクト")]
+    //private GameObject hpSliderObj;
+
+    ////[SerializeField,Header("HPが出ている時間")]
+    ////private float hpActiveTime = 1.0f;
+
+    //private const float HP_ACTIVE_TIME = 2.0f;
+
+    //private float hpCurrentTimer;
+
     private Slider hpSlider;
+
+    //private bool isDamage;
 
     private PlayerController pc;
 
@@ -36,14 +48,21 @@ public class Enemy : MonoBehaviour
 
         hpSlider = GetComponentInChildren<Slider>();
 
+        //hpSlider = hpSliderObj.GetComponent<Slider>();
+
         hpSlider.value = 1;
+
+        //hpSliderObj.SetActive(false);
+
+        //hpCurrentTimer = 0;
+
+        //isDamage = false;
 
         pc = GameObject.Find("Player").GetComponent<PlayerController>();
 
         expSeed = 0;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         expSeed++;
@@ -52,6 +71,10 @@ public class Enemy : MonoBehaviour
             expSeed = 0;
 
         hpSlider.value = currentHP / maxHP;
+
+
+        //ActiveHPSlider();
+
 
         if (currentHP <= 0)
         {
@@ -63,12 +86,16 @@ public class Enemy : MonoBehaviour
     public void AttackedBullet(float damage)
     {
         currentHP -= damage;
+        //isDamage = true;
+        //hpCurrentTimer = 0;
     }
 
 
     public void AttackedSpecialBullet(float damage)
     {
         currentHP -= damage;
+        //isDamage = true;
+        //hpCurrentTimer = 0;
 
         if (currentHP <= 0)
         {
@@ -76,6 +103,22 @@ public class Enemy : MonoBehaviour
             DrapExp(expValue);
         }
     }
+
+    //private void ActiveHPSlider()
+    //{
+    //    if (isDamage)
+    //    {
+    //        hpSliderObj.SetActive(true);
+    //        hpCurrentTimer += Time.deltaTime;
+
+    //        if (hpCurrentTimer >= HP_ACTIVE_TIME)
+    //        {
+    //            isDamage = false;
+    //            hpCurrentTimer = 0;
+    //            hpSliderObj.SetActive(false);
+    //        }
+    //    }
+    //}
 
     private void DrapExp(int exp)
     {

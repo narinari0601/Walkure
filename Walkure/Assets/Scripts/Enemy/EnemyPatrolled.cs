@@ -30,6 +30,7 @@ public class EnemyPatrolled : MonoBehaviour
 
     private void Patroal()
     {
+        vector = (routeTargetArray[routeTargetNum].transform.position - transform.position).normalized;
         transform.position += vector * speed * 0.01f;
     }
 
@@ -42,12 +43,12 @@ public class EnemyPatrolled : MonoBehaviour
             if (routeTargetNum == routeTargetArray.Length - 1)
             {
                 routeTargetNum = 0;
-                vector = (routeTargetArray[routeTargetNum].transform.position - transform.position).normalized;
+                //vector = (routeTargetArray[routeTargetNum].transform.position - transform.position).normalized;
                 return;
             }
 
             routeTargetNum++;
-            vector = (routeTargetArray[routeTargetNum].transform.position - transform.position).normalized;
+            //vector = (routeTargetArray[routeTargetNum].transform.position - transform.position).normalized;
         }
     }
 }
